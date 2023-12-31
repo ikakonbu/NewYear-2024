@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta property="og:title" content="新年2024">
+  <meta property="og:description" content="恒例のあれ">
+  <title>新年2024</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import {  getFirestore , collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+        import { getStorage , ref , getDownloadURL} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyDzstE53M6OkBi7p9LSe7u2tp7lDXw1Pc8",
+        authDomain: "newyear2023-2cb0a.firebaseapp.com",
+        projectId: "newyear2023-2cb0a",
+        storageBucket: "newyear2023-2cb0a.appspot.com",
+        messagingSenderId: "230233730605",
+        appId: "1:230233730605:web:94c2f4eae9dfa22dacd2a4"
+        };
+
+        var d = new Date() ;
+        var a = Math.floor(d.getTime()/1000);
+        if(((Math.floor(d.getTime()/1000))/18 > parseInt("5A48738",16))? 1 : 0){ 
+            let main = document.querySelector("#main_wrapper_2024");
+            main.classList.remove("nodisplay");
+
+            const app = initializeApp(firebaseConfig);
+            const imagedb = getStorage(app);
+            var storageRef = ref(imagedb);
+            const imagesRef = ref(storageRef, 'giftcard.png');
+            getDownloadURL(imagesRef)
+            .then((url) => {
+                console.log(url);
+                let h1 = document.querySelector("#Number");
+                h1.src = url;
+            });
+        } else {
+            let main = document.querySelector("#main_wrapper_2023");
+            main.classList.remove("nodisplay");
+        }
+  </script>
+</head>
+
+<style>
+    .nodisplay{
+        display: none;
+    }
+    img{
+        width:min(100vw, 80vh);
+    }
+    .photo {
+        background: #d8dfe0;
+        & img, p {
+            width:min(500px, 80vw);
+            margin: 0 calc((100vw - min(500px, 80vw)) / 2);
+        }
+    }
+    a:hover{
+        transition: 0.3s;
+        filter: drop-shadow(0 0 10px rgba(200,30,0,0.8));
+    }
+</style>
+
+<body>
+    <p>ことしは時間なかったからてぬきだよーん</p>
+    <div id="main_wrapper_2024" class="nodisplay">
+        <img src="main_image.png">
+        <img src="sub_image.png">
+    </div>
+    <div id="main_wrapper_2023" class="nodisplay">
+        <img src="2023_image.png">
+    </div>
+    <div class="photo">
+        <img src="photos_title.png">
+        <a href="https://photos.app.goo.gl/tqmMRaxLTR5tkGPU9"><img src="photos_button.png"></a>
+        <p>閲覧に使ったGoogleアカウントがアルバム内に残る可能性があります。アカウントの取り扱いには注意してください</p>
+    </div>
+    <div class="gift">
+        <img src="gift-description.png">
+        <img id="Number">
+    </div>
+</body>
